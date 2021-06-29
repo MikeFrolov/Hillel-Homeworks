@@ -1,6 +1,7 @@
 from flask import Flask
 from faker import Faker
 import re
+import csv
 
 app = Flask(__name__)
 
@@ -29,6 +30,23 @@ def user_gen(number) -> dict:
         users[name] = mail
 
     return users
+
+
+@app.route("/mean")
+def average_values() -> str:
+
+    height_sm, weight_sm = [], []
+
+    with open('hw2/hw.csv') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            height_sm.append(float(row[' "Height(Inches)"']))
+            weight_sm.append(float(row[' "Weight(Pounds)"']))
+
+    medium_h = 2.54 * sum(sorted(height_sm)) / len(height_sm)
+    medium_w = 0.453592 * sum(sorted(weight_sm)) / len(weight_sm)
+
+    return f"<p>Medium height: {medium_h}sm, Medium weight: {medium_w}kg</p>"
 
 
 if __name__ == '__main__':
