@@ -2,6 +2,7 @@ from flask import Flask
 from faker import Faker
 import re
 import csv
+import requests
 
 app = Flask(__name__)
 
@@ -47,6 +48,15 @@ def average_values() -> str:
     medium_w = 0.453592 * sum(sorted(weight_sm)) / len(weight_sm)
 
     return f"<p>Medium height: {medium_h}sm, Medium weight: {medium_w}kg</p>"
+
+
+@app.route("/space")
+def astronauts() -> str:
+    r = requests.get('http://api.open-notify.org/astros.json')
+    number = r.json()["number"]
+    return f"<p>{number}</p>"
+
+    return a.number
 
 
 if __name__ == '__main__':
