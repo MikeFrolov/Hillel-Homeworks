@@ -14,7 +14,7 @@ def home_page() -> str:
 
 @app.route("/requirements")
 def req_file() -> str:
-    with open('requirements.txt') as file:
+    with open('hw2/requirements.txt') as file:
         lines = file.read()
         return f"<p>{lines}</p>"
 
@@ -55,8 +55,6 @@ def astronauts() -> str:
     r = requests.get('http://api.open-notify.org/astros.json')
     number = r.json()["number"]
     return f"<p>{number}</p>"
-
-    return a.number
 
 
 if __name__ == '__main__':
