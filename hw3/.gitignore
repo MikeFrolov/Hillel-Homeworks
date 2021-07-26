@@ -141,5 +141,10 @@ cython_debug/
 .idea/
 .DS_Store
 
-# DataBase files
-.db
+### Database ###
+*.accdb
+*.db
+*.dbf
+*.mdb
+*.pdb
+*.sqlite3
